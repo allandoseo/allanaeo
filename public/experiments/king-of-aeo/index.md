@@ -1,5 +1,5 @@
 ---
-title: "The King of AEO Experiment · Allan Oliveira"
+title: "King of AEO Experiment: What Worked and What Didn't (2026)"
 url: https://allanaeo.com/experiments/king-of-aeo/
 markdown_url: https://allanaeo.com/experiments/king-of-aeo/index.md
 author: Allan Oliveira
