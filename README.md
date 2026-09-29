@@ -15,20 +15,33 @@ npm run deploy        # roda cf:verify antes e só então publica
 
 `predeploy` é um hook do npm: se a guarda falhar, `wrangler deploy` não executa.
 
+Os scripts são Node puro, sem dependências — rodam igual em PowerShell, cmd,
+Git Bash, macOS e Linux. Não é preciso ter bash instalado.
+
 ---
 
 ### Caminho 1 — sua máquina (recomendado)
 
-```bash
+⚠️ **Windows:** não clone dentro de `C:\WINDOWS\System32`. Aquela pasta é
+protegida e o `git clone` falha com `Permission denied`. Use uma pasta sua:
+
+```powershell
+cd $HOME
+mkdir -Force projetos
+cd projetos
 git clone https://github.com/allandoseo/allanaeo.git
 cd allanaeo
 npm run setup:local
 ```
 
+No macOS ou Linux, o mesmo a partir de `~/projetos`.
+
 O script faz logout de qualquer sessão anterior, abre o navegador para o login,
-lê o `wrangler whoami`, **recusa se o e-mail não for o esperado**, grava o
-`.env` com a conta escolhida e roda a guarda de ponta a ponta para provar que
-funciona.
+lê o `wrangler whoami`, **recusa se o e-mail não for o esperado**, fixa a conta
+no `.env` e roda a guarda de ponta a ponta para provar que funciona.
+
+Neste caminho **não é preciso token**: o `wrangler login` grava uma sessão OAuth
+em `~/.config/.wrangler`.
 
 ### Caminho 2 — CI ou container na nuvem
 
@@ -37,7 +50,7 @@ em `http://localhost:8976/oauth/callback`, e num container esse `localhost` é o
 próprio container, inacessível do seu navegador. O login trava e o `whoami`
 nunca autentica. Use um API Token.
 
-Em *My Profile → API Tokens → Create Custom Token*, preencha:
+Em *My Profile → API Tokens → Create Custom Token*:
 
 | Campo | Valor |
 | --- | --- |
@@ -53,11 +66,12 @@ Em *My Profile → API Tokens → Create Custom Token*, preencha:
 Duas escolhas acima não são detalhe:
 
 - **`User → User Details → Read`** é o que faz o `whoami` imprimir o e-mail.
-  Sem esse escopo a saída mostra só nome e ID da conta, e a checagem de e-mail
-  da guarda não tem o que comparar.
-- **`Account Resources` numa conta específica** é a trava na origem: um token
-  em *All accounts* consegue publicar em qualquer conta sua, que é exatamente o
-  acidente que este repositório tenta evitar.
+  Sem esse escopo a saída traz só nome e ID da conta, e a checagem de e-mail da
+  guarda não tem o que comparar.
+- **`Account Resources` numa conta específica** é a trava na origem: um token em
+  *All accounts* publica em qualquer conta sua, que é exatamente o acidente que
+  este repositório existe para evitar. A guarda detecta isso — ela reporta
+  quantas contas a credencial alcança.
 
 Depois defina no ambiente: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`,
 `CF_EXPECTED_ACCOUNT_ID` e `CF_EXPECTED_EMAIL`. O token é **segredo**: nunca vai
@@ -79,7 +93,7 @@ Cada item aborta com exit 1:
 - **Usuário errado** — o e-mail do `whoami` não bate com `CF_EXPECTED_EMAIL`.
 
 A guarda aceita sessão OAuth e API token indistintamente: o `wrangler whoami` é
-a fonte da verdade. Configuração vem do ambiente ou do `.env` da raiz, com o
+a fonte da verdade. A configuração vem do ambiente ou do `.env` da raiz, com o
 ambiente tendo prioridade. Se o `wrangler.toml` já traz `account_id`, ele é lido
 como conta esperada e `CF_EXPECTED_ACCOUNT_ID` vira opcional.
 

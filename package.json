@@ -1,9 +1,11 @@
 {
   "name": "allanaeo",
   "private": true,
+  "type": "module",
   "scripts": {
-    "setup:local": "bash scripts/setup-local.sh",
-    "cf:verify": "bash scripts/verify-cloudflare-account.sh",
+    "setup:local": "node scripts/setup-local.mjs",
+    "cf:verify": "node scripts/verify-cloudflare-account.mjs",
+    "cf:whoami": "wrangler whoami",
     "predeploy": "npm run cf:verify",
     "deploy": "wrangler deploy"
   },
