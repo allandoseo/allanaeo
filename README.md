@@ -18,6 +18,16 @@ npm run deploy        # roda cf:verify antes e só então publica
 Os scripts são Node puro, sem dependências — rodam igual em PowerShell, cmd,
 Git Bash, macOS e Linux. Não é preciso ter bash instalado.
 
+A conta de destino está fixada em `wrangler.toml`:
+
+```toml
+account_id = "6939ad4db2ec5dc60b8d7c57b7e6faab"   # allanaeocom
+```
+
+A guarda lê esse valor como conta esperada, então a trava vale mesmo sem
+nenhuma variável de ambiente configurada, para qualquer pessoa que clone o
+repositório.
+
 ---
 
 ### Caminho 1 — sua máquina (recomendado)

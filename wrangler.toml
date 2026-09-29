@@ -1,0 +1,16 @@
+# Conta de destino do deploy.
+#
+#   conta      allanaeocom  (allan.em.cristo.jesus@gmail.com)
+#   subdomain  allanaeocom.workers.dev
+#
+# Fixar account_id aqui e a trava principal deste repositorio: havendo varias
+# contas Cloudflare no mesmo navegador, sem isso o wrangler pode publicar na
+# conta errada sem avisar. scripts/verify-cloudflare-account.mjs le este valor
+# como conta esperada, entao a trava vale mesmo sem nenhuma variavel de ambiente.
+account_id = "6939ad4db2ec5dc60b8d7c57b7e6faab"
+
+name = "allanaeo"
+compatibility_date = "2026-09-29"
+
+# Descomente ao criar o Worker, apontando para o entry point:
+# main = "src/index.js"
