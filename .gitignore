@@ -1,0 +1,14 @@
+node_modules/
+.wrangler/
+dist/
+.output/
+
+# segredos: nunca versionar
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+!.env.example
+*.pem
+
+.DS_Store

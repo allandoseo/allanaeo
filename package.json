@@ -1,0 +1,11 @@
+{
+  "name": "allanaeo",
+  "private": true,
+  "scripts": {
+    "cf:verify": "bash scripts/verify-cloudflare-account.sh",
+    "predeploy": "npm run cf:verify",
+    "deploy": "wrangler deploy",
+    "prewhoami": "npm run cf:verify",
+    "whoami": "wrangler whoami"
+  }
+}
