@@ -2,10 +2,12 @@
   "name": "allanaeo",
   "private": true,
   "scripts": {
+    "setup:local": "bash scripts/setup-local.sh",
     "cf:verify": "bash scripts/verify-cloudflare-account.sh",
     "predeploy": "npm run cf:verify",
-    "deploy": "wrangler deploy",
-    "prewhoami": "npm run cf:verify",
-    "whoami": "wrangler whoami"
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.143.0"
   }
 }

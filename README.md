@@ -2,68 +2,86 @@
 
 ## Deploy Cloudflare: travando a conta de destino
 
-Este repositório usa mais de uma conta Cloudflare no mesmo navegador. Um deploy
-publicado na conta errada é difícil de perceber e chato de reverter, então o
-deploy passa obrigatoriamente por uma guarda que verifica a conta antes de
-qualquer publicação.
-
-### Por que não usamos `wrangler login`
-
-`wrangler login` é um fluxo OAuth que exige um navegador na mesma máquina e um
-callback em `http://localhost:8976/oauth/callback`. Em sessões de CI ou em
-containers na nuvem esse `localhost` é o próprio container, inacessível do seu
-navegador — o login trava indefinidamente e o `whoami` nunca autentica.
-
-Em vez disso usamos **API Token**, que é mais seguro para este objetivo: o token
-nasce dentro de uma conta específica e não tem como escorregar para outra.
-
-### Configuração
-
-1. Faça login na Cloudflare **com a conta de destino**.
-2. Vá em *My Profile → API Tokens → Create Token*, template
-   **Edit Cloudflare Workers**.
-3. Adicione também o escopo **User → User Details: Read** — é isso que permite à
-   guarda conferir o e-mail dono da credencial.
-4. Copie o Account ID em *Workers & Pages* (barra lateral direita).
-5. Defina as variáveis:
-
-   | Variável                 | Papel                                             |
-   | ------------------------ | ------------------------------------------------- |
-   | `CLOUDFLARE_API_TOKEN`   | credencial (**segredo**)                          |
-   | `CLOUDFLARE_ACCOUNT_ID`  | conta que o wrangler usa — a trava real           |
-   | `CF_EXPECTED_ACCOUNT_ID` | conta que a guarda espera                         |
-   | `CF_EXPECTED_EMAIL`      | opcional: e-mail dono da credencial               |
-
-   Localmente, copie `.env.example` para `.env`. Em sessões na nuvem, use as
-   variáveis de ambiente da sessão. **Nunca** comite o token nem cole em chat.
-
-### Uso
+Este projeto convive com mais de uma conta Cloudflare no mesmo navegador. Um
+deploy publicado na conta errada é fácil de não perceber e chato de reverter,
+então o deploy passa obrigatoriamente por uma guarda que confere a conta antes
+de publicar qualquer coisa.
 
 ```bash
-npm run cf:verify   # verifica a conta, sem publicar nada
-npm run deploy      # roda cf:verify via predeploy e só então publica
+npm run setup:local   # uma vez, na sua máquina: login + trava da conta
+npm run cf:verify     # confere a conta, sem publicar nada
+npm run deploy        # roda cf:verify antes e só então publica
 ```
 
 `predeploy` é um hook do npm: se a guarda falhar, `wrangler deploy` não executa.
 
+---
+
+### Caminho 1 — sua máquina (recomendado)
+
+```bash
+git clone https://github.com/allandoseo/allanaeo.git
+cd allanaeo
+npm run setup:local
+```
+
+O script faz logout de qualquer sessão anterior, abre o navegador para o login,
+lê o `wrangler whoami`, **recusa se o e-mail não for o esperado**, grava o
+`.env` com a conta escolhida e roda a guarda de ponta a ponta para provar que
+funciona.
+
+### Caminho 2 — CI ou container na nuvem
+
+`wrangler login` **não funciona** sem navegador: o fluxo OAuth exige um callback
+em `http://localhost:8976/oauth/callback`, e num container esse `localhost` é o
+próprio container, inacessível do seu navegador. O login trava e o `whoami`
+nunca autentica. Use um API Token.
+
+Em *My Profile → API Tokens → Create Custom Token*, preencha:
+
+| Campo | Valor |
+| --- | --- |
+| **Token name** | `allanaeo-deploy` |
+| **Permissions** | `Account` · `Workers Scripts` · **Edit** |
+| | `Account` · `Account Settings` · **Read** |
+| | `User` · `User Details` · **Read** |
+| | `Zone` · `Workers Routes` · **Edit** *(só se usar domínio próprio)* |
+| **Account Resources** | `Include` · **a conta específica** — nunca *All accounts* |
+| **Client IP Filtering** | vazio |
+| **TTL** | opcional |
+
+Duas escolhas acima não são detalhe:
+
+- **`User → User Details → Read`** é o que faz o `whoami` imprimir o e-mail.
+  Sem esse escopo a saída mostra só nome e ID da conta, e a checagem de e-mail
+  da guarda não tem o que comparar.
+- **`Account Resources` numa conta específica** é a trava na origem: um token
+  em *All accounts* consegue publicar em qualquer conta sua, que é exatamente o
+  acidente que este repositório tenta evitar.
+
+Depois defina no ambiente: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`,
+`CF_EXPECTED_ACCOUNT_ID` e `CF_EXPECTED_EMAIL`. O token é **segredo**: nunca vai
+para o git, para um chat ou para um log.
+
+---
+
 ### O que a guarda checa
 
-Cada item aborta o deploy com exit 1:
+Cada item aborta com exit 1:
 
-- **Credencial ausente** — nenhum `CLOUDFLARE_API_TOKEN` no ambiente.
+- **Sem credencial ativa** — nem sessão OAuth nem `CLOUDFLARE_API_TOKEN` válido.
 - **Conta esperada indefinida** — sem `CF_EXPECTED_ACCOUNT_ID` nem `account_id`
   no `wrangler.toml` não há o que verificar, então recusa (*fail-closed*).
-- **Credencial inválida** — o wrangler não autenticou (token expirado, revogado,
-  ou colado com espaços/quebras de linha).
-- **Token de outra conta** — a conta esperada não está entre as que o token
-  alcança.
-- **Conta não fixada** — o token alcança várias contas e nenhuma foi fixada; sem
-  isso o wrangler pode escolher a errada.
-- **Fixada na conta errada** — `CLOUDFLARE_ACCOUNT_ID` divergente da esperada.
+- **Credencial de outra conta** — a conta esperada não está entre as alcançáveis.
+- **Conta não fixada** — a credencial alcança várias contas e nenhuma foi
+  fixada; sem isso o wrangler pode escolher a errada.
+- **Fixada na conta errada** — `CLOUDFLARE_ACCOUNT_ID` diverge da esperada.
 - **Usuário errado** — o e-mail do `whoami` não bate com `CF_EXPECTED_EMAIL`.
 
-Se `wrangler.toml` já traz `account_id`, a guarda o lê como conta esperada e
-`CF_EXPECTED_ACCOUNT_ID` se torna opcional.
+A guarda aceita sessão OAuth e API token indistintamente: o `wrangler whoami` é
+a fonte da verdade. Configuração vem do ambiente ou do `.env` da raiz, com o
+ambiente tendo prioridade. Se o `wrangler.toml` já traz `account_id`, ele é lido
+como conta esperada e `CF_EXPECTED_ACCOUNT_ID` vira opcional.
 
 > ⚠️ Nunca use `wrangler deploy --temporary` como atalho para a falta de login:
 > ele publica numa **conta de preview aleatória e descartável**, o oposto do que
