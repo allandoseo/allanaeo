@@ -12,5 +12,12 @@ account_id = "6939ad4db2ec5dc60b8d7c57b7e6faab"
 name = "allanaeo"
 compatibility_date = "2026-09-29"
 
-# Descomente ao criar o Worker, apontando para o entry point:
+# Site estatico: o Worker serve so os arquivos de public/, sem codigo proprio.
+# Cada pagina e um index.html na sua pasta, servido com barra final (/about/).
+[assets]
+directory = "./public"
+html_handling = "auto-trailing-slash"
+not_found_handling = "none"
+
+# Descomente se o Worker precisar de codigo, apontando para o entry point:
 # main = "src/index.js"
