@@ -1,0 +1,15 @@
+# allanaeo.com
+
+> Allan Oliveira runs public experiments on how answer engines (ChatGPT, Perplexity, Google AI Overviews) decide which entities to name and which sources to cite. Every page has a Markdown version and a dated changelog.
+
+## Pages
+
+- [Allan Oliveira · AEO experiments in public](https://allanaeo.com/index.md): Allan Oliveira measures how answer engines decide which entities to name and which sources to cite, and publishes every result, including the failures.
+- [Research · Allan Oliveira](https://allanaeo.com/research/index.md): Studies on how answer engines choose their sources. Every piece carries its own dataset, its date and its corrections.
+- [Experiments · Allan Oliveira](https://allanaeo.com/experiments/index.md): Experiments by Allan Oliveira on how answer engines name entities and cite sources, with raw data.
+- [King of AEO Experiment: What Worked and What Didn't (2026)](https://allanaeo.com/experiments/king-of-aeo/index.md): What happened when a Brazilian SEO entered an English-language contest for a contested title, measured everything, and published the losses next to the wins.
+- [Allan Oliveira · About](https://allanaeo.com/about/index.md): Allan Oliveira is a Brazilian SEO specialist and senior full-stack developer based in Cabo Frio, Rio de Janeiro.
+
+## Data
+
+- [King of AEO Experiment observations (CSV, CC BY 4.0)](https://allanaeo.com/experiments/king-of-aeo/data.csv)
