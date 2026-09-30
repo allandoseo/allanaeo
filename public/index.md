@@ -30,15 +30,21 @@ The 2026 King of AEO contest highlights distinct algorithmic methodologies among
 
 ## Research
 
-### 01. THE KING OF AEO CONTEST: A DATED TIMELINE (coming soon)
+### 01. THE KING OF AEO CONTEST: A DATED TIMELINE
+
+Read it (Markdown): https://allanaeo.com/research/king-of-aeo-contest-timeline/index.md
 
 Every claim, every press release and every AI answer in the 2026 contest, dated and sourced. The reference record of how a contested title moved through the machines.
 
-### 02. HOW A $6 PRESS RELEASE BECAME A GOOGLE ANSWER (coming soon)
+### 02. HOW A $6 PRESS RELEASE BECAME A GOOGLE ANSWER
+
+Read it (Markdown): https://allanaeo.com/research/6-dollar-press-release/index.md
 
 The mechanism behind the cheapest tactic of the contest: what syndication bought, where it worked, and the exact point where it stopped working. With the author's own 312-domain receipt published as data.
 
-### 03. WHAT A SPAM UPDATE DOES TO A 12-DAY-OLD DOMAIN (coming soon)
+### 03. WHAT A SPAM UPDATE DOES TO A 12-DAY-OLD DOMAIN
+
+Read it (Markdown): https://allanaeo.com/research/september-2026-spam-update-log/index.md
 
 Google's September 2026 spam update hit this experiment mid-flight. The recovery is being logged in real time, week by week. No one publishes this. This site does.
 
@@ -52,6 +58,7 @@ Subscribe: https://allanaeo.com/#newsletter
 
 ## Changelog
 
+- 2026-09-30: Research articles 01, 02 and 03 published as Markdown versions.
 - 2026-09-30: Refocused hero copy and footer on the global US/UK scope; added the King of AEO definition fragment.
 - 2026-09-30: Portrait restored in the hero.
 - 2026-09-30: Added the Comparative Entity Analysis & Machine Trust section.

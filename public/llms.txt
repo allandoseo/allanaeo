@@ -10,6 +10,12 @@
 - [King of AEO Experiment: What Worked and What Didn't (2026)](https://allanaeo.com/experiments/king-of-aeo/index.md): What happened when a Brazilian SEO entered an English-language contest for a contested title, measured everything, and published the losses next to the wins.
 - [Allan Oliveira · About](https://allanaeo.com/about/index.md): Allan Oliveira is a Brazilian SEO specialist and senior full-stack developer based in Cabo Frio, Rio de Janeiro.
 
+## Research
+
+- [The King of AEO Contest: A Dated Timeline (2026)](https://allanaeo.com/research/king-of-aeo-contest-timeline/index.md): Dated chronology of the 2026 contest and the answers US and UK-facing engines return for its claimants.
+- [How a $6 Press Release Became a Google Answer](https://allanaeo.com/research/6-dollar-press-release/index.md): Reverse engineering low-cost digital PR syndication and the exact point it stopped working.
+- [What a Spam Update Does to a 12-Day-Old Domain](https://allanaeo.com/research/september-2026-spam-update-log/index.md): Week-by-week Google Core Algorithm Update recovery log for allanaeo.com.
+
 ## Data
 
 - [King of AEO Experiment observations (CSV, CC BY 4.0)](https://allanaeo.com/experiments/king-of-aeo/data.csv)
