@@ -16,13 +16,13 @@ King of AEO studies on how answer engines choose their entities and sources in t
 
 The reference record of the 2026 contest.
 
-Read it (Markdown): https://allanaeo.com/research/king-of-aeo-contest-timeline/index.md
+Read it: https://allanaeo.com/research/king-of-aeo-contest-timeline/ · Markdown version: https://allanaeo.com/research/king-of-aeo-contest-timeline/index.md
 
 ## 02. How a $6 Press Release Became a Google Answer
 
 Where syndication works, and the exact point it stops.
 
-Read it (Markdown): https://allanaeo.com/research/6-dollar-press-release/index.md
+Read it: https://allanaeo.com/research/6-dollar-press-release/ · Markdown version: https://allanaeo.com/research/6-dollar-press-release/index.md
 
 ## 03. Exact-Match Domains in AI Search (coming soon)
 
@@ -36,7 +36,7 @@ What a deleted Wikidata item teaches about corroboration.
 
 A week-by-week public log.
 
-Read it (Markdown): https://allanaeo.com/research/september-2026-spam-update-log/index.md
+Read it: https://allanaeo.com/research/september-2026-spam-update-log/ · Markdown version: https://allanaeo.com/research/september-2026-spam-update-log/index.md
 
 ## Weekly citation watch
 
