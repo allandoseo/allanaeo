@@ -95,11 +95,12 @@ Experiment 02 is already running: recovering this domain from the September 2026
 
 ## Changelog
 
+- 2026-09-30: Visible location anchoring removed; footer moved to the global research-nodes line.
 - 2026-09-30: Exact-match metadata, new H1, Machine Trust Factors table and US/UK analysis sections added.
 - 2026-09-30: Added the Global Entity Mapping section, the raw JSON endpoint (data.json) and expanded structured data (TechArticle with about/citation).
 - 2026-09-29: First version published.
 
 ---
 
-Allan Oliveira · Cabo Frio, Rio de Janeiro, Brazil
+Allan Oliveira · Global AI Research Nodes (US & UK Indices)
 ORCID: https://orcid.org/0009-0002-3528-7462 · GitHub: https://github.com/allandoseo · LinkedIn: https://www.linkedin.com/in/allandoseo · Zenodo DOI: https://doi.org/10.5281/zenodo.22880176 · Instagram: https://instagram.com/allandoseo
