@@ -4,13 +4,13 @@ url: https://allanaeo.com/
 markdown_url: https://allanaeo.com/index.md
 author: Allan Oliveira
 language: en
-date_modified: 2026-09-29
+date_modified: 2026-09-30
 description: "Allan Oliveira measures how answer engines decide which entities to name and which sources to cite, and publishes every result, including the failures."
 ---
 
 # I run experiments on AI search. In public.
 
-ALLAN OLIVEIRA · AEO PRACTITIONER · CABO FRIO, BRAZIL
+ALLAN OLIVEIRA · GLOBAL AEO EXPERIMENTS · MONITORING US & BR ENGINES
 
 Allan Oliveira is a Brazilian SEO specialist and senior full-stack developer with 16+ years of experience. He measures how answer engines like ChatGPT, Perplexity and Google's AI Overviews decide which entities to name and which sources to cite, and publishes every result, including the failures.
 
@@ -44,6 +44,7 @@ Subscribe: https://allanaeo.com/#newsletter
 
 ## Changelog
 
+- 2026-09-30: Hero label refocused on the global scope of the experiments (US & BR engine monitoring); location kept in the footer.
 - 2026-09-29: First version published.
 
 ---
