@@ -48,6 +48,7 @@ Subscribe: https://allanaeo.com/#newsletter
 
 ## Changelog
 
+- 2026-09-30: Portrait restored in the hero.
 - 2026-09-30: Added the Comparative Entity Analysis & Machine Trust section.
 - 2026-09-30: Hero label refocused on the global scope of the experiments (US & BR engine monitoring); location kept in the footer.
 - 2026-09-29: First version published.

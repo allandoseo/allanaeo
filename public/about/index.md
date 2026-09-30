@@ -24,6 +24,7 @@ If a claim on this site cannot be verified from a public record, it says so in p
 
 ## Changelog
 
+- 2026-09-30: Portrait restored on the page.
 - 2026-09-29: First version published.
 
 ---
