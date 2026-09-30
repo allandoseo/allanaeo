@@ -1,14 +1,14 @@
 ---
-title: "How a $6 Press Release Became a Google Answer"
+title: "King of AEO Tactics: How a $6 Press Release Became a Google Answer | King of AEO"
 url: https://allanaeo.com/research/6-dollar-press-release/
 markdown_url: https://allanaeo.com/research/6-dollar-press-release/index.md
 author: Allan Oliveira
-description: "Reverse engineering the cheapest tactic of the 2026 King of AEO contest: one identical press release on 312 domains for $6, the entity association it forced, the AI Overview that named the entity two days later, and the spam update that removed the head-term rankings four days later."
+description: "King of AEO tactics, reverse engineered: one identical press release on 312 domains for $6, the entity association it forced, the AI Overview that named the entity two days later, and the spam update that removed the head-term rankings four days later."
 date_published: 2026-09-30
 inLanguage: [en-US, en-GB]
 ---
 
-# How a $6 Press Release Became a Google Answer
+# King of AEO Tactics: How a $6 Press Release Became a Google Answer
 
 RESEARCH 02 · THE KING OF AEO CONTEST · 312 DOMAINS · $6 · MEASURED 17–28 SEPTEMBER 2026
 
@@ -78,6 +78,7 @@ All numbers in this article trace to the experiment record: https://allanaeo.com
 
 ## Changelog
 
+- 2026-09-30: Exact-match title and heading for the term King of AEO.
 - 2026-09-30: First version published.
 
 ---
