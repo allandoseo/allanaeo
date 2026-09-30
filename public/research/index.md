@@ -4,7 +4,7 @@ url: https://allanaeo.com/research/
 markdown_url: https://allanaeo.com/research/index.md
 author: Allan Oliveira
 language: en
-date_modified: 2026-09-29
+date_modified: 2026-09-30
 description: "Studies on how answer engines choose their sources. Every piece carries its own dataset, its date and its corrections."
 ---
 
@@ -12,13 +12,17 @@ description: "Studies on how answer engines choose their sources. Every piece ca
 
 Studies on how answer engines choose their sources. Every piece carries its own dataset, its date and its corrections.
 
-## 01. The King of AEO Contest: A Dated Timeline (coming soon)
+## 01. The King of AEO Contest: A Dated Timeline
 
 The reference record of the 2026 contest.
 
-## 02. How a $6 Press Release Became a Google Answer (coming soon)
+Read it (Markdown): https://allanaeo.com/research/king-of-aeo-contest-timeline/index.md
+
+## 02. How a $6 Press Release Became a Google Answer
 
 Where syndication works, and the exact point it stops.
+
+Read it (Markdown): https://allanaeo.com/research/6-dollar-press-release/index.md
 
 ## 03. Exact-Match Domains in AI Search (coming soon)
 
@@ -28,9 +32,11 @@ Eight EMDs entered one contest. What actually ranked.
 
 What a deleted Wikidata item teaches about corroboration.
 
-## 05. What a Spam Update Does to a New Domain (coming soon)
+## 05. What a Spam Update Does to a New Domain
 
 A week-by-week public log.
+
+Read it (Markdown): https://allanaeo.com/research/september-2026-spam-update-log/index.md
 
 ## Weekly citation watch
 
@@ -38,6 +44,7 @@ Fixed prompts, three engines, two countries. Every Monday. Subscribe: https://al
 
 ## Changelog
 
+- 2026-09-30: Published research 01, 02 and 05 as Markdown versions.
 - 2026-09-29: First version published.
 
 ---
