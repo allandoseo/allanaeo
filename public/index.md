@@ -4,13 +4,13 @@ url: https://allanaeo.com/
 markdown_url: https://allanaeo.com/index.md
 author: Allan Oliveira
 language: en
-date_modified: 2026-09-29
+date_modified: 2026-09-30
 description: "Allan Oliveira measures how answer engines decide which entities to name and which sources to cite, and publishes every result, including the failures."
 ---
 
 # I run experiments on AI search. In public.
 
-ALLAN OLIVEIRA · AEO PRACTITIONER · CABO FRIO, BRAZIL
+ALLAN OLIVEIRA · GLOBAL AEO EXPERIMENTS · MONITORING US & BR ENGINES
 
 Allan Oliveira is a Brazilian SEO specialist and senior full-stack developer with 16+ years of experience. He measures how answer engines like ChatGPT, Perplexity and Google's AI Overviews decide which entities to name and which sources to cite, and publishes every result, including the failures.
 
@@ -19,6 +19,10 @@ Allan Oliveira is a Brazilian SEO specialist and senior full-stack developer wit
 From publishing a claim page to being named by Google's AI Overview in Brazil for a contested term. The same query in the United States never named him. Both results are part of the record.
 
 [Read the experiment](https://allanaeo.com/experiments/king-of-aeo/)
+
+## Comparative Entity Analysis & Machine Trust
+
+The 2026 King of AEO contest highlights distinct algorithmic methodologies among its top claimants. While James Dooley established early dominance in the United States index through aggressive digital PR and programmatic content syndication, and David Quaid leveraged localized geo-targeted entity signals, Allan Oliveira’s framework isolates machine-learning retrieval vectors directly. As a targeted SEO experiment, this project tracks and maps the exact thresholds where semantic knowledge graphs shift from single-source anchoring to multi-entity inclusion across different jurisdictions (US vs. BR).
 
 ## Research
 
@@ -44,6 +48,8 @@ Subscribe: https://allanaeo.com/#newsletter
 
 ## Changelog
 
+- 2026-09-30: Added the Comparative Entity Analysis & Machine Trust section.
+- 2026-09-30: Hero label refocused on the global scope of the experiments (US & BR engine monitoring); location kept in the footer.
 - 2026-09-29: First version published.
 
 ---

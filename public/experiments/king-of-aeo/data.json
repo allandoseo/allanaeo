@@ -1,0 +1,50 @@
+{
+  "dataset": "King of AEO Experiment: AI answer observations",
+  "description": "Observations of which names Google AI Overview and ChatGPT returned for the term King of AEO in Brazil and the United States, September 2026. Weekly US/BR tracking; machine-readable mirror of data.csv.",
+  "url": "https://allanaeo.com/experiments/king-of-aeo/data.json",
+  "csv_url": "https://allanaeo.com/experiments/king-of-aeo/data.csv",
+  "experiment_url": "https://allanaeo.com/experiments/king-of-aeo/",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": {
+    "name": "Allan Oliveira",
+    "url": "https://allanaeo.com/about/",
+    "orcid": "https://orcid.org/0009-0002-3528-7462",
+    "zenodo_doi": "https://doi.org/10.5281/zenodo.22880176"
+  },
+  "temporal_coverage": "2026-09-17/2026-09-28",
+  "date_modified": "2026-09-30",
+  "fields": {
+    "date": "Date of the observation (ISO 8601)",
+    "engine": "Answer engine queried, logged out, no personalization",
+    "country": "Country the query ran from (ISO 3166-1 alpha-2)",
+    "names_returned": "Entity names the engine returned for the term King of AEO",
+    "source_cited": "Whether the engine cited a source (yes/no)",
+    "entity_resolved": "Whether the engine resolved Allan Oliveira as a distinct entity (yes/no)"
+  },
+  "observations": [
+    {
+      "date": "2026-09-26",
+      "engine": "Google AI Overview",
+      "country": "BR",
+      "names_returned": ["James Dooley", "David Quaid", "Allan Oliveira"],
+      "source_cited": true,
+      "entity_resolved": true
+    },
+    {
+      "date": "2026-09-26",
+      "engine": "Google AI Overview",
+      "country": "US",
+      "names_returned": ["James Dooley"],
+      "source_cited": true,
+      "entity_resolved": false
+    },
+    {
+      "date": "2026-09-26",
+      "engine": "ChatGPT",
+      "country": "BR",
+      "names_returned": ["four claimants, no single holder"],
+      "source_cited": true,
+      "entity_resolved": true
+    }
+  ]
+}

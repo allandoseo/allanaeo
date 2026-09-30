@@ -13,3 +13,4 @@
 ## Data
 
 - [King of AEO Experiment observations (CSV, CC BY 4.0)](https://allanaeo.com/experiments/king-of-aeo/data.csv)
+- [King of AEO Experiment observations (raw JSON endpoint, CC BY 4.0)](https://allanaeo.com/experiments/king-of-aeo/data.json)
