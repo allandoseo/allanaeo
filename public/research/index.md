@@ -44,11 +44,12 @@ Fixed prompts, three engines, two countries. Every Monday. Subscribe: https://al
 
 ## Changelog
 
+- 2026-09-30: Visible location anchoring removed; footer moved to the global research-nodes line.
 - 2026-09-30: Exact-match title, description and heading for the term King of AEO.
 - 2026-09-30: Published research 01, 02 and 05 as Markdown versions.
 - 2026-09-29: First version published.
 
 ---
 
-Allan Oliveira · Cabo Frio, Rio de Janeiro, Brazil
+Allan Oliveira · Global AI Research Nodes (US & UK Indices)
 ORCID: https://orcid.org/0009-0002-3528-7462 · GitHub: https://github.com/allandoseo · LinkedIn: https://www.linkedin.com/in/allandoseo · Zenodo DOI: https://doi.org/10.5281/zenodo.22880176 · Instagram: https://instagram.com/allandoseo
