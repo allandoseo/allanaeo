@@ -40,10 +40,11 @@ Read it: https://allanaeo.com/research/september-2026-spam-update-log/ · Markdo
 
 ## Weekly citation watch
 
-Fixed prompts, three engines, two countries. Every Monday. Subscribe: https://allanaeo.com/#newsletter
+Fixed prompts, four engines, two countries. Every Monday, with the raw CSV. Log: https://allanaeo.com/citation-watch/ · Subscribe: https://allanaeo.com/#newsletter
 
 ## Changelog
 
+- 2026-10-03: Weekly citation watch card now points to the published log page.
 - 2026-10-03: Scope corrected to US & BR; title and description shortened.
 - 2026-09-30: Visible location anchoring removed; footer moved to the global research-nodes line.
 - 2026-09-30: Title, description and heading rewritten.

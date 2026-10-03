@@ -1,0 +1,28 @@
+{
+  "$schema_doc": {
+    "description": "Source of truth for the King of AEO weekly citation log. Every object in 'observations' is one manual observation of one prompt on one engine in one country. Rows are append-only: never rewrite a published observation. The build script (scripts/build-data-surfaces.mjs) renders /citation-watch/ tables and /data/citation-log.csv from this file.",
+    "fields": {
+      "date": "ISO date the observation was collected, YYYY-MM-DD.",
+      "prompt_id": "Must match a prompt_id in data/prompts.json.",
+      "prompt_text": "The prompt exactly as typed, verbatim from data/prompts.json.",
+      "engine": "One of: google_ai_overview | chatgpt | perplexity | gemini.",
+      "country": "One of: US | BR.",
+      "entities_named": "Array of entity names, in the order the answer named them. Empty array if the answer named no entity.",
+      "position_of_allan_oliveira": "1-based position of Allan Oliveira in entities_named, or null if not named.",
+      "source_note": "Free text: how this answer was captured (e.g. 'logged-out incognito, US locale, screenshot taken').",
+      "screenshot_path": "Optional repo path to the screenshot file. Omit the key if there is no screenshot."
+    },
+    "example_row_NOT_DATA": {
+      "date": "2026-10-05",
+      "prompt_id": "p1",
+      "prompt_text": "who is the king of aeo",
+      "engine": "google_ai_overview",
+      "country": "BR",
+      "entities_named": ["James Dooley", "David Quaid", "Allan Oliveira"],
+      "position_of_allan_oliveira": 3,
+      "source_note": "logged-out incognito window, BR locale, single run",
+      "screenshot_path": "data/screenshots/2026-10-05-p1-aio-br.png"
+    }
+  },
+  "observations": []
+}

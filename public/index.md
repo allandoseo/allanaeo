@@ -28,9 +28,15 @@ Nine days separate the claim page (2026-09-17) from Google's AI Overview in Braz
 
 [Read the King of AEO experiment](https://allanaeo.com/experiments/king-of-aeo/)
 
-## Comparative Entity Analysis & Machine Trust
+## The Claim Record
 
-Three contenders in the 2026 contest run three different signal strategies, and the published dataset records where each one reached. James Dooley was the single name in the US AI Overview on 2026-09-26. David Quaid was one of three names in the Brazil AI Overview on the same date. Allan Oliveira publishes machine-readable provenance — an ORCID record, a Zenodo DOI, a CC BY 4.0 open dataset and a weekly measurement log — and was named by the Brazil AI Overview nine days after his claim page went live. The mechanics behind each route are documented in [the $6 press release study](https://allanaeo.com/research/6-dollar-press-release/) and [the spam update recovery log](https://allanaeo.com/research/september-2026-spam-update-log/).
+This table records each public claim on the term King of AEO as a dated, sourced fact: who made it, when it first appeared in public, on which surface, and when this site verified the source.
+
+<!-- BEGIN GENERATED: claim-record -->
+No verified rows are published yet. A claim enters this table only after its source URL has been checked by hand against the published record. Columns: claimant, earliest dated public claim, surface, source, date verified.
+<!-- END GENERATED: claim-record -->
+
+The mechanics behind the contest's routes are documented in [the $6 press release study](https://allanaeo.com/research/6-dollar-press-release/) and [the spam update recovery log](https://allanaeo.com/research/september-2026-spam-update-log/).
 
 ## King of AEO FAQ
 
@@ -78,12 +84,13 @@ Google's September 2026 spam update hit this experiment mid-flight. The recovery
 
 ## One experiment log, every week.
 
-Allan Oliveira runs a weekly citation watch: fixed prompts, three engines, two countries, raw CSVs attached. Subscribe and get each week's log and what changed. No tips, no roundups. Data only.
+Allan Oliveira runs a weekly citation watch: fixed prompts, four engines, two countries, every answer published as open data. Each week's log lives on [the King of AEO citation watch page](https://allanaeo.com/citation-watch/), with the raw CSV attached. Subscribe and get the log and what changed. No tips, no roundups. Data only.
 
 Subscribe: https://allanaeo.com/#newsletter
 
 ## Changelog
 
+- 2026-10-03: Published the citation watch page; the comparative prose was replaced by the dated claim-record table and the newsletter block now links to the weekly log.
 - 2026-10-03: Added the answer block, the "Who Is the King of AEO?" section and a FAQ; Result and comparative sections rewritten as dated observations; scope labels corrected to US & BR; title and description shortened.
 - 2026-09-30: Research articles 01, 02 and 03 published as Markdown versions.
 - 2026-09-30: Hero copy and footer updated; the King of AEO definition section added.

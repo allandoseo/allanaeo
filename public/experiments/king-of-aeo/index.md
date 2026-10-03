@@ -71,7 +71,7 @@ While James Dooley holds the United States answer box through years of accumulat
 
 ## US vs BR Index Discrepancy Analysis
 
-The measured discrepancy sits between the United States and Brazil: on 26 September 2026 the US AI Overview returned a single-source answer (James Dooley) while the Brazilian overview returned multi-entity inclusion (Dooley, Quaid, Oliveira). The United Kingdom index enters the tracking scope with the weekly citation watch; no UK observations exist yet. The working hypothesis: the UK index follows the US single-source pattern until independent English-language signals accumulate. Every weekly log publishes the raw result either way.
+The measured discrepancy sits between the United States and Brazil: on 26 September 2026 the US AI Overview returned a single-source answer (James Dooley) while the Brazilian overview returned multi-entity inclusion (Dooley, Quaid, Oliveira). The United Kingdom index enters the tracking scope with the weekly citation watch (https://allanaeo.com/citation-watch/); no UK observations exist yet. The working hypothesis: the UK index follows the US single-source pattern until independent English-language signals accumulate. Every weekly log publishes the raw result either way.
 
 ## Vector Ingestion and Entity Authority Logs
 
@@ -95,6 +95,7 @@ Experiment 02 is already running: recovering this domain from the September 2026
 
 ## Changelog
 
+- 2026-10-03: Linked the weekly citation watch page from the index analysis.
 - 2026-10-03: Scope labels corrected (US observed, UK tracking without observations, BR in the discrepancy analysis); wording updated; title and description rewritten in plain language.
 - 2026-09-30: Visible location anchoring removed; footer moved to the global research-nodes line.
 - 2026-09-30: New H1, the Machine Trust Factors table and the index analysis sections added.

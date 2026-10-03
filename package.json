@@ -6,7 +6,8 @@
     "setup:local": "node scripts/setup-local.mjs",
     "cf:verify": "node scripts/verify-cloudflare-account.mjs",
     "cf:whoami": "wrangler whoami",
-    "predeploy": "npm run cf:verify",
+    "build:data": "node scripts/build-data-surfaces.mjs",
+    "predeploy": "npm run build:data && npm run cf:verify",
     "deploy": "wrangler deploy"
   },
   "devDependencies": {

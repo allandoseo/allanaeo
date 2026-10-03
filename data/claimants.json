@@ -1,0 +1,20 @@
+{
+  "$schema_doc": {
+    "description": "Source of truth for the homepage claim-record table. One object per public claim on the term 'King of AEO', recorded as a dated, sourced fact with neutral wording. The build script renders the homepage table from this file. Do not add a row until the source URL has been checked by hand; date_verified is the date of that check.",
+    "fields": {
+      "name": "Person who made the claim, as publicly written.",
+      "earliest_public_claim_date": "ISO date of the earliest dated public claim found, YYYY-MM-DD.",
+      "claim_surface": "Where that earliest claim was made (e.g. 'personal site', 'press release', 'LinkedIn post', 'podcast').",
+      "source_url": "URL of the claim itself, not of coverage about it.",
+      "date_verified": "ISO date this site last checked that the source URL still shows the claim."
+    },
+    "example_row_NOT_DATA": {
+      "name": "Example Name",
+      "earliest_public_claim_date": "2026-01-15",
+      "claim_surface": "personal site",
+      "source_url": "https://example.com/claim-page",
+      "date_verified": "2026-10-03"
+    }
+  },
+  "claimants": []
+}

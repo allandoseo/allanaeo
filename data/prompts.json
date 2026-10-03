@@ -1,0 +1,18 @@
+{
+  "$schema_doc": {
+    "description": "The FIXED prompt set for the King of AEO weekly citation watch. The value of the series is longitudinal comparison, so this set must never change once the first observation is published. Adding a prompt later is acceptable only as a new prompt_id with its own start date; editing or removing an existing prompt breaks the series.",
+    "fields": {
+      "prompt_id": "Stable short id, referenced by data/citation-log.json rows.",
+      "prompt_text": "The prompt exactly as it will be typed into each engine, verbatim, lowercase."
+    },
+    "frozen_since": "Set to the date of the first published observation. Until then the set may still be edited."
+  },
+  "frozen_since": null,
+  "prompts": [
+    { "prompt_id": "p1", "prompt_text": "who is the king of aeo" },
+    { "prompt_id": "p2", "prompt_text": "king of aeo 2026" },
+    { "prompt_id": "p3", "prompt_text": "who won the king of aeo contest" },
+    { "prompt_id": "p4", "prompt_text": "allan oliveira king of aeo" },
+    { "prompt_id": "p5", "prompt_text": "who holds the king of aeo title" }
+  ]
+}
