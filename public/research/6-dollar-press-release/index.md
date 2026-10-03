@@ -1,11 +1,12 @@
 ---
-title: "King of AEO Tactics: How a $6 Press Release Became a Google Answer | King of AEO"
+title: "King of AEO Tactics: The $6 Press Release"
 url: https://allanaeo.com/research/6-dollar-press-release/
 markdown_url: https://allanaeo.com/research/6-dollar-press-release/index.md
 author: Allan Oliveira
-description: "King of AEO tactics, reverse engineered: one identical press release on 312 domains for $6, the entity association it forced, the AI Overview that named the entity two days later, and the spam update that removed the head-term rankings four days later."
+description: "One press release on 312 domains for $6: the entity association it forced, the AI Overview naming 2 days later, and the ranking loss 4 days after that."
 date_published: 2026-09-30
-inLanguage: [en-US, en-GB]
+date_modified: 2026-10-03
+inLanguage: en-US
 ---
 
 # King of AEO Tactics: How a $6 Press Release Became a Google Answer
@@ -45,7 +46,7 @@ Google's automated information extraction index parses those statements directly
 
 ## AI Overview citation mechanisms: why the answer layer picked it up
 
-On 2026-09-26, logged out and without personalization, Google's AI Overview in Brazil named three entities for the term: James Dooley, David Quaid, Allan Oliveira. It cited sources. The US overview named only James Dooley. ChatGPT in Brazil listed four claimants and no single holder. Bing ranked the domain #3 for the head term, and its answer box named Allan Oliveira.
+On 2026-09-26, logged out and without personalization, Google's AI Overview in Brazil named three entities for the term: James Dooley, David Quaid, Allan Oliveira. It cited sources. The US overview named only James Dooley. ChatGPT in Brazil listed four contenders and no single holder. Bing ranked the domain #3 for the head term, and its answer box named Allan Oliveira.
 
 AI Overview citation mechanisms run on a retrieval layer, not on classic ranking alone. The generation step names entities that co-occur with the query term across the retrieved candidate pool. A fresh burst of 312 mentions expands that candidate pool faster than the link graph revalues a domain. That asymmetry explains why the answer layer moved within two days while organic authority for the head term did not durably move at all.
 
@@ -68,20 +69,23 @@ The human-editor layer returned the same verdict earlier and faster. A Wikidata 
 
 For US and UK agencies pricing this tactic: $6 bought a measurable, fast, temporary entity-association spike in a secondary market. It did not buy a durable answer, and it did not move the primary market.
 
-The contest's three claimants map the alternatives. James Dooley holds the US answer through years of accumulated English-language press coverage and programmatic syndication: volume with age. David Quaid contests the term through targeted local and community entity signals: density in specific markets. Allan Oliveira is testing machine-readable provenance: ORCID, a Zenodo DOI, a CC BY 4.0 open dataset and a public measurement log. Cheap syndication moved the Brazilian overview. It never moved the US overview, where Dooley's accumulated independent coverage sets the retrieval baseline.
+The contest's three contenders map the alternatives. James Dooley holds the US answer through years of accumulated English-language press coverage and programmatic syndication: volume with age. David Quaid contests the term through targeted local and community entity signals: density in specific markets. Allan Oliveira is testing machine-readable provenance: ORCID, a Zenodo DOI, a CC BY 4.0 open dataset and a public measurement log. Cheap syndication moved the Brazilian overview. It never moved the US overview, where Dooley's accumulated independent coverage sets the retrieval baseline.
 
 ## Scope and limitations
 
 The dataset currently contains US and Brazil observations. The United Kingdom is declared tracking scope of the ongoing weekly citation watch; no UK observations exist yet and none are claimed here.
 
+The one-paragraph summary of this record sits in [the King of AEO answer on the homepage](https://allanaeo.com/#answer).
+
 All numbers in this article trace to the experiment record: https://allanaeo.com/experiments/king-of-aeo/ · CSV: https://allanaeo.com/experiments/king-of-aeo/data.csv · JSON: https://allanaeo.com/experiments/king-of-aeo/data.json
 
 ## Changelog
 
-- 2026-09-30: Exact-match title and heading for the term King of AEO.
+- 2026-10-03: Scope wording updated (contenders); link added to the homepage answer; title and description shortened.
+- 2026-09-30: Title and heading rewritten.
 - 2026-09-30: First version published.
 
 ---
 
-Allan Oliveira · Global AI Research Nodes (US & UK Indices)
+Allan Oliveira · Global AI Research Nodes (US & BR Indices)
 ORCID: https://orcid.org/0009-0002-3528-7462 · GitHub: https://github.com/allandoseo · LinkedIn: https://www.linkedin.com/in/allandoseo · Zenodo DOI: https://doi.org/10.5281/zenodo.22880176 · Instagram: https://instagram.com/allandoseo

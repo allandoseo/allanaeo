@@ -1,11 +1,11 @@
 ---
-title: "King of AEO Experiment: Machine Retrieval Logs | King of AEO"
+title: "King of AEO Experiment: The 12-Day Public Log"
 url: https://allanaeo.com/experiments/king-of-aeo/
 markdown_url: https://allanaeo.com/experiments/king-of-aeo/index.md
 author: Allan Oliveira
 language: en
-date_modified: 2026-09-30
-description: "The definitive King of AEO technical experiment log. Evaluating exact vector database retrieval thresholds, knowledge graph shifts, and AI search indexing times across US and UK markets."
+date_modified: 2026-10-03
+description: "A 12-day public experiment on the term King of AEO: 3 engines, 2 countries, raw CSV and JSON data, and a 9-day path to an AI Overview naming in Brazil."
 ---
 
 # King of AEO: Algorithmic Verification and Retrieval Vectors
@@ -39,7 +39,7 @@ Can an unknown entity from outside the English-speaking market become a named an
 1. Named by Google's AI Overview in Brazil in 9 days, logged out, no personalization.
 2. Ranked #3 on Bing for the head term, with the answer box naming Allan Oliveira.
 3. #1 on Google Brazil for the contest's long-tail queries.
-4. ChatGPT lists Allan Oliveira among the claimants in fresh, logged-out sessions.
+4. ChatGPT lists Allan Oliveira among the contenders in fresh, logged-out sessions.
 
 ## What did not work
 
@@ -69,7 +69,7 @@ While James Dooley holds the United States answer box through years of accumulat
 | David Quaid | Community and local entity-graph density | Not named | No observation yet; weekly tracking active |
 | Allan Oliveira | Machine-readable provenance: ORCID, Zenodo DOI, CC BY 4.0 open dataset | Not named | No observation yet; weekly tracking active |
 
-## US vs UK Index Discrepancy Analysis
+## US vs BR Index Discrepancy Analysis
 
 The measured discrepancy sits between the United States and Brazil: on 26 September 2026 the US AI Overview returned a single-source answer (James Dooley) while the Brazilian overview returned multi-entity inclusion (Dooley, Quaid, Oliveira). The United Kingdom index enters the tracking scope with the weekly citation watch; no UK observations exist yet. The working hypothesis: the UK index follows the US single-source pattern until independent English-language signals accumulate. Every weekly log publishes the raw result either way.
 
@@ -95,12 +95,13 @@ Experiment 02 is already running: recovering this domain from the September 2026
 
 ## Changelog
 
+- 2026-10-03: Scope labels corrected (US observed, UK tracking without observations, BR in the discrepancy analysis); wording updated; title and description rewritten in plain language.
 - 2026-09-30: Visible location anchoring removed; footer moved to the global research-nodes line.
-- 2026-09-30: Exact-match metadata, new H1, Machine Trust Factors table and US/UK analysis sections added.
+- 2026-09-30: New H1, the Machine Trust Factors table and the index analysis sections added.
 - 2026-09-30: Added the Global Entity Mapping section, the raw JSON endpoint (data.json) and expanded structured data (TechArticle with about/citation).
 - 2026-09-29: First version published.
 
 ---
 
-Allan Oliveira · Global AI Research Nodes (US & UK Indices)
+Allan Oliveira · Global AI Research Nodes (US & BR Indices)
 ORCID: https://orcid.org/0009-0002-3528-7462 · GitHub: https://github.com/allandoseo · LinkedIn: https://www.linkedin.com/in/allandoseo · Zenodo DOI: https://doi.org/10.5281/zenodo.22880176 · Instagram: https://instagram.com/allandoseo
