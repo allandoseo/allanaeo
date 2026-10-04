@@ -128,7 +128,9 @@ const dataset = {
   variableMeasured: ['date', 'prompt_id', 'prompt_text', 'engine', 'country', 'entities_named', 'position_of_allan_oliveira', 'source_note', 'screenshot_path'],
   distribution: [{ '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://allanaeo.com/data/citation-log.csv' }],
 };
-if (dates.length) dataset.temporalCoverage = `${dates[0]}/${dates[dates.length - 1]}`;
+// With no rows yet, coverage states the announced series start (published on the page);
+// once observations exist it is derived from the real dates.
+dataset.temporalCoverage = dates.length ? `${dates[0]}/${dates[dates.length - 1]}` : '2026-10-05/..';
 replaceJsonLd('public/citation-watch/index.html', {
   '@context': 'https://schema.org',
   '@graph': [
@@ -166,6 +168,48 @@ ${CLAIM_HEAD}
 }
 fillRegion('public/index.html', 'claim-record', claimHtml);
 fillRegion('public/index.md', 'claim-record', claimMd);
+
+// ---------- propagate canonical nodes to every page ----------
+// LLM crawlers read pages in isolation and do not join graphs across URLs, so the
+// canonical Person node (maintained ONLY in about's graph) is materialized verbatim
+// into every page, the WebSite node is normalized site-wide, and the experiment
+// Dataset cited on the homepage is embedded in full there. Idempotent; runs on predeploy.
+const PAGES = [
+  'public/index.html', 'public/about/index.html', 'public/citation-watch/index.html',
+  'public/research/index.html', 'public/experiments/index.html',
+  'public/experiments/king-of-aeo/index.html',
+  'public/research/6-dollar-press-release/index.html',
+  'public/research/king-of-aeo-contest-timeline/index.html',
+  'public/research/september-2026-spam-update-log/index.html',
+];
+const readGraph = f => JSON.parse(read(f).match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+const editGraph = (f, fn) => {
+  const g = readGraph(f); fn(g);
+  fs.writeFileSync(f, read(f).replace(/(<script type="application\/ld\+json">)[\s\S]*?(<\/script>)/, `$1${JSON.stringify(g)}$2`));
+};
+const personFull = readGraph('public/about/index.html')['@graph'].find(n => n['@type'] === 'Person' && n['@id'] === PERSON['@id']);
+if (!personFull || !personFull.name) throw new Error('canonical Person node not found in about/index.html');
+const WEBSITE = { '@type': 'WebSite', '@id': 'https://allanaeo.com/#website', url: 'https://allanaeo.com/', name: 'allanaeo.com', publisher: { ...PERSON }, author: { ...PERSON } };
+const expDataset = readGraph('public/experiments/king-of-aeo/index.html')['@graph'].find(n => n['@type'] === 'Dataset');
+for (const f of PAGES) {
+  editGraph(f, g => {
+    const arr = g['@graph'];
+    const wi = arr.findIndex(n => n['@type'] === 'WebSite');
+    if (wi >= 0) arr[wi] = WEBSITE;
+    const pi = arr.findIndex(n => n['@type'] === 'Person' && n['@id'] === PERSON['@id']);
+    if (pi >= 0) arr[pi] = personFull; else arr.splice(1, 0, personFull);
+    if (f === 'public/index.html') {
+      const wp = arr.find(n => n['@type'] === 'WebPage');
+      if (wp && Array.isArray(wp.citation)) {
+        const ci = wp.citation.findIndex(c => c['@id'] === expDataset['@id']);
+        if (ci >= 0) wp.citation[ci] = { '@id': expDataset['@id'] };
+      }
+      if (!arr.some(n => n['@type'] === 'Dataset' && n['@id'] === expDataset['@id'])) arr.push(expDataset);
+      else arr[arr.findIndex(n => n['@type'] === 'Dataset' && n['@id'] === expDataset['@id'])] = expDataset;
+    }
+  });
+}
+console.log('canonical nodes propagated to ' + PAGES.length + ' pages');
 
 // ---------- report ----------
 const empties = [];
