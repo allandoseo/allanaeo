@@ -181,6 +181,13 @@ const PAGES = [
   'public/research/6-dollar-press-release/index.html',
   'public/research/king-of-aeo-contest-timeline/index.html',
   'public/research/september-2026-spam-update-log/index.html',
+  'public/king-of-aeo/index.html', 'public/who-is-the-king-of-aeo/index.html',
+  'public/allan-oliveira-king-of-aeo/index.html', 'public/king-of-aeo-2026/index.html',
+  'public/king-of-aeo-usa/index.html', 'public/king-of-aeo-scoreboard/index.html',
+  'public/king-of-aeo-methodology/index.html', 'public/king-of-aeo-google-ai-overview/index.html',
+  'public/king-of-aeo-chatgpt/index.html', 'public/king-of-aeo-perplexity/index.html',
+  'public/king-of-aeo-gemini/index.html', 'public/king-of-aeo-vs-james-dooley/index.html',
+  'public/king-of-aeo-vs-david-quaid/index.html',
 ];
 const readGraph = f => JSON.parse(read(f).match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 const editGraph = (f, fn) => {
@@ -210,6 +217,83 @@ for (const f of PAGES) {
   });
 }
 console.log('canonical nodes propagated to ' + PAGES.length + ' pages');
+
+// ---------- scoreboard + per-engine observation tables ----------
+// One merged view over BOTH real data sources: the September experiment
+// (public/experiments/king-of-aeo/data.json) and the weekly citation log.
+// Nothing here is typed by hand; unmeasured engines render "Not yet measured".
+const expData = JSON.parse(read('public/experiments/king-of-aeo/data.json'));
+const EXP_ENGINE_KEY = { 'Google AI Overview': 'google_ai_overview', 'ChatGPT': 'chatgpt' };
+const allanStatus = names => {
+  const joined = names.join(' | ');
+  if (names.some(n => n.includes('Allan Oliveira'))) return 'Appeared (#' + (names.findIndex(n => n.includes('Allan Oliveira')) + 1) + ')';
+  if (joined.includes('four claimants')) return 'Listed among contenders (no single holder)';
+  return 'Not appeared';
+};
+const rows = [
+  ...expData.observations.map(o => ({
+    date: o.date, engineKey: EXP_ENGINE_KEY[o.engine] ?? o.engine, engineLabel: o.engine,
+    market: o.country, query: 'king of aeo', result: o.entities_named ? '' : '', names: o.names_returned,
+    status: allanStatus(o.names_returned), source: '/experiments/king-of-aeo/data.csv', sourceLabel: 'experiment CSV',
+  })),
+  ...observations.map(o => ({
+    date: o.date, engineKey: o.engine, engineLabel: ENGINES[o.engine],
+    market: o.country, query: o.prompt_text, names: o.entities_named,
+    status: o.position_of_allan_oliveira === null ? (o.entities_named.length ? 'Not appeared' : 'Not appeared (no entity named)') : `Appeared (#${o.position_of_allan_oliveira})`,
+    source: '/data/citation-log.csv', sourceLabel: 'citation log CSV',
+  })),
+].sort((a, b) => b.date.localeCompare(a.date) || a.engineLabel.localeCompare(b.engineLabel) || a.market.localeCompare(b.market));
+
+const sbHtml = `<div class="table-wrap"><table>
+<caption>All recorded King of AEO search observations — ${rows.length} row${rows.length === 1 ? '' : 's'}, from the open datasets</caption>
+<thead><tr><th scope="col">DATE</th><th scope="col">ENGINE</th><th scope="col">MARKET</th><th scope="col">QUERY</th><th scope="col">RESULT (NAMES RETURNED)</th><th scope="col">ALLAN OLIVEIRA</th><th scope="col">SOURCE</th></tr></thead>
+<tbody>
+${rows.map(r => `<tr><td class="nw"><time datetime="${r.date}">${r.date}</time></td><td class="nw">${esc(r.engineLabel)}</td><td>${r.market}</td><td>${esc(r.query)}</td><td>${esc(r.names.join(', '))}</td><td class="nw">${esc(r.status)}</td><td class="nw"><a href="${r.source}">${r.sourceLabel}</a></td></tr>`).join('\n')}
+</tbody></table></div>`;
+const sbMd = `| Date | Engine | Market | Query | Result (names returned) | Allan Oliveira | Source |\n| --- | --- | --- | --- | --- | --- | --- |\n${rows.map(r => `| ${r.date} | ${r.engineLabel} | ${r.market} | ${mdCell(r.query)} | ${mdCell(r.names.join(', '))} | ${r.status} | https://allanaeo.com${r.source} |`).join('\n')}`;
+fillRegion('public/king-of-aeo-scoreboard/index.html', 'scoreboard', sbHtml);
+fillRegion('public/king-of-aeo-scoreboard/index.md', 'scoreboard', sbMd);
+
+for (const [key, page] of [
+  ['google_ai_overview', 'king-of-aeo-google-ai-overview'],
+  ['chatgpt', 'king-of-aeo-chatgpt'],
+  ['perplexity', 'king-of-aeo-perplexity'],
+  ['gemini', 'king-of-aeo-gemini'],
+]) {
+  const er = rows.filter(r => r.engineKey === key);
+  let eh, em;
+  if (er.length) {
+    eh = `<div class="table-wrap"><table>
+<caption>Recorded ${esc(ENGINES[key])} observations for the King of AEO query</caption>
+<thead><tr><th scope="col">DATE</th><th scope="col">MARKET</th><th scope="col">QUERY</th><th scope="col">NAMES RETURNED (IN ORDER)</th><th scope="col">ALLAN OLIVEIRA</th></tr></thead>
+<tbody>
+${er.map(r => `<tr><td class="nw"><time datetime="${r.date}">${r.date}</time></td><td>${r.market}</td><td>${esc(r.query)}</td><td>${esc(r.names.join(', '))}</td><td class="nw">${esc(r.status)}</td></tr>`).join('\n')}
+</tbody></table></div>`;
+    em = `| Date | Market | Query | Names returned (in order) | Allan Oliveira |\n| --- | --- | --- | --- | --- |\n${er.map(r => `| ${r.date} | ${r.market} | ${mdCell(r.query)} | ${mdCell(r.names.join(', '))} | ${r.status} |`).join('\n')}`;
+  } else {
+    eh = `<p><strong>Not yet measured.</strong> ${ENGINES[key]} enters the weekly tracking scope on 2026-10-05; the first observations publish with the first weekly log and appear here, on the scoreboard and in the raw CSV the same day.</p>`;
+    em = `**Not yet measured.** ${ENGINES[key]} enters the weekly tracking scope on 2026-10-05; the first observations publish with the first weekly log and appear here, on the scoreboard and in the raw CSV the same day.`;
+  }
+  fillRegion(`public/${page}/index.html`, `obs-${key}`, eh);
+  fillRegion(`public/${page}/index.md`, `obs-${key}`, em);
+}
+console.log(`scoreboard + engine tables rendered (${rows.length} merged observation rows)`);
+
+// ---------- sitemap.xml ----------
+const urlOf = f => 'https://allanaeo.com' + f.replace(/^public/, '').replace(/index\.html$/, '');
+const lastmodOf = f => {
+  const g = readGraph(f);
+  const n = g['@graph'].find(n => n.dateModified) ?? {};
+  return (n.dateModified ?? '').slice(0, 10) || null;
+};
+const sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'];
+for (const f of PAGES) {
+  const lm = lastmodOf(f);
+  sm.push(`<url><loc>${urlOf(f)}</loc>${lm ? `<lastmod>${lm}</lastmod>` : ''}</url>`);
+}
+sm.push('</urlset>');
+fs.writeFileSync('public/sitemap.xml', sm.join('\n') + '\n');
+console.log('sitemap.xml written (' + PAGES.length + ' URLs)');
 
 // ---------- report ----------
 const empties = [];
