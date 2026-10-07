@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<url>
+<loc>https://allanaeo.com/</loc>
+<image:image>
+<image:loc>https://allanaeo.com/assets/allan-oliveira-king-of-aeo.webp</image:loc>
+</image:image>
+<image:image>
+<image:loc>https://allanaeo.com/assets/allan-oliveira-king-of-aeo@2x.webp</image:loc>
+</image:image>
+</url>
+<url>
+<loc>https://allanaeo.com/about/</loc>
+<image:image>
+<image:loc>https://allanaeo.com/assets/allan-oliveira-king-of-aeo.webp</image:loc>
+</image:image>
+<image:image>
+<image:loc>https://allanaeo.com/assets/allan-oliveira-king-of-aeo@2x.webp</image:loc>
+</image:image>
+</url>
+</urlset>

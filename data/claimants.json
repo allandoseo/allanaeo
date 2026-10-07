@@ -14,7 +14,63 @@
       "claim_surface": "personal site",
       "source_url": "https://example.com/claim-page",
       "date_verified": "2026-10-03"
-    }
+    },
+    "notes": [
+      "Julian Goldie's claim (his own blog network) is documented at kingofaeo.pro/claimants/julian-goldie/ but carries no date, so it cannot enter this dated table.",
+      "Vithurs' exact-match domains kingofaeo.org and whoiskingofaeo.com returned 404 on 2026-10-07; the AB Newswire release is the surviving primary source.",
+      "Quaid's kingofaeo.co shows the claim but no visible date; the 2026-09-04 date is the LinkedIn article / ACN Newswire release date documented at kingofaeo.pro/claimants/david-quaid/.",
+      "Sturm's short-form video (early September 2026) is undated; his dated article of 2026-09-20 is the earliest dated surface."
+    ]
   },
-  "claimants": []
+  "claimants": [
+    {
+      "name": "James Dooley",
+      "earliest_public_claim_date": "2026-08-31",
+      "claim_surface": "press release announcement (jespernissen.com)",
+      "source_url": "https://jespernissen.com/king-of-aeo-is-james-dooley-official-crowning-of-the-king-of-answer-engine-optimization/",
+      "date_verified": "2026-10-07"
+    },
+    {
+      "name": "David G. Quaid",
+      "earliest_public_claim_date": "2026-09-04",
+      "claim_surface": "LinkedIn article and claim page on kingofaeo.co",
+      "source_url": "https://kingofaeo.co/",
+      "date_verified": "2026-10-07"
+    },
+    {
+      "name": "Vithurs",
+      "earliest_public_claim_date": "2026-09-07",
+      "claim_surface": "AB Newswire press release (private social-media vote)",
+      "source_url": "https://www.abnewswire.com/pressreleases/vithurs-named-king-of-aeo-following-2026-industry-vote_834169.html",
+      "date_verified": "2026-10-07"
+    },
+    {
+      "name": "Jacky Chou",
+      "earliest_public_claim_date": "2026-09-07",
+      "claim_surface": "agency site announcement (indexsy.com, private vote)",
+      "source_url": "https://indexsy.com/king-of-aeo/",
+      "date_verified": "2026-10-07"
+    },
+    {
+      "name": "Stephane Morera",
+      "earliest_public_claim_date": "2026-09-13",
+      "claim_surface": "agency about page (evoix.io)",
+      "source_url": "https://evoix.io/about",
+      "date_verified": "2026-10-07"
+    },
+    {
+      "name": "Allan Oliveira",
+      "earliest_public_claim_date": "2026-09-17",
+      "claim_surface": "claim page on exact-match domain (kingofaeo.pro)",
+      "source_url": "https://kingofaeo.pro/",
+      "date_verified": "2026-10-07"
+    },
+    {
+      "name": "Edward Sturm",
+      "earliest_public_claim_date": "2026-09-20",
+      "claim_surface": "dated article on edwardsturm.com (short-form video claim, early September 2026)",
+      "source_url": "https://edwardsturm.com/articles/king-of-aeo-seo-tactics/",
+      "date_verified": "2026-10-07"
+    }
+  ]
 }

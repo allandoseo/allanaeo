@@ -138,9 +138,9 @@ replaceJsonLd('public/citation-watch/index.html', {
     { '@type': 'Person', '@id': PERSON['@id'] },
     { '@type': 'WebPage', '@id': 'https://allanaeo.com/citation-watch/', url: 'https://allanaeo.com/citation-watch/',
       name: 'King of AEO Citation Watch: Weekly Log',
-      description: 'Weekly King of AEO citation log: 5 fixed prompts replayed on 4 AI engines in the US and Brazil, every answer published as open data. First log 2026-10-05.',
+      description: 'King of AEO citation data: every recorded observation from the September 2026 experiment and the weekly watch — 5 fixed prompts, 4 AI engines, US and Brazil, open CSV.',
       isPartOf: { '@id': 'https://allanaeo.com/#website' }, author: PERSON,
-      datePublished: '2026-10-03', dateModified: '2026-10-03', inLanguage: 'en-US',
+      datePublished: '2026-10-03', dateModified: '2026-10-07', inLanguage: 'en-US',
       mainEntity: { '@id': 'https://allanaeo.com/citation-watch/#dataset' } },
     dataset,
   ],
@@ -168,6 +168,8 @@ ${CLAIM_HEAD}
 }
 fillRegion('public/index.html', 'claim-record', claimHtml);
 fillRegion('public/index.md', 'claim-record', claimMd);
+fillRegion('public/king-of-aeo-claimants/index.html', 'claim-record', claimHtml);
+fillRegion('public/king-of-aeo-claimants/index.md', 'claim-record', claimMd);
 
 // ---------- propagate canonical nodes to every page ----------
 // LLM crawlers read pages in isolation and do not join graphs across URLs, so the
@@ -176,18 +178,12 @@ fillRegion('public/index.md', 'claim-record', claimMd);
 // Dataset cited on the homepage is embedded in full there. Idempotent; runs on predeploy.
 const PAGES = [
   'public/index.html', 'public/about/index.html', 'public/citation-watch/index.html',
+  'public/king-of-aeo-claimants/index.html',
   'public/research/index.html', 'public/experiments/index.html',
   'public/experiments/king-of-aeo/index.html',
   'public/research/6-dollar-press-release/index.html',
   'public/research/king-of-aeo-contest-timeline/index.html',
   'public/research/september-2026-spam-update-log/index.html',
-  'public/king-of-aeo/index.html', 'public/who-is-the-king-of-aeo/index.html',
-  'public/allan-oliveira-king-of-aeo/index.html', 'public/king-of-aeo-2026/index.html',
-  'public/king-of-aeo-usa/index.html', 'public/king-of-aeo-scoreboard/index.html',
-  'public/king-of-aeo-methodology/index.html', 'public/king-of-aeo-google-ai-overview/index.html',
-  'public/king-of-aeo-chatgpt/index.html', 'public/king-of-aeo-perplexity/index.html',
-  'public/king-of-aeo-gemini/index.html', 'public/king-of-aeo-vs-james-dooley/index.html',
-  'public/king-of-aeo-vs-david-quaid/index.html',
 ];
 const readGraph = f => JSON.parse(read(f).match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 const editGraph = (f, fn) => {
@@ -251,15 +247,10 @@ const sbHtml = `<div class="table-wrap"><table>
 ${rows.map(r => `<tr><td class="nw"><time datetime="${r.date}">${r.date}</time></td><td class="nw">${esc(r.engineLabel)}</td><td>${r.market}</td><td>${esc(r.query)}</td><td>${esc(r.names.join(', '))}</td><td class="nw">${esc(r.status)}</td><td class="nw"><a href="${r.source}">${r.sourceLabel}</a></td></tr>`).join('\n')}
 </tbody></table></div>`;
 const sbMd = `| Date | Engine | Market | Query | Result (names returned) | Allan Oliveira | Source |\n| --- | --- | --- | --- | --- | --- | --- |\n${rows.map(r => `| ${r.date} | ${r.engineLabel} | ${r.market} | ${mdCell(r.query)} | ${mdCell(r.names.join(', '))} | ${r.status} | https://allanaeo.com${r.source} |`).join('\n')}`;
-fillRegion('public/king-of-aeo-scoreboard/index.html', 'scoreboard', sbHtml);
-fillRegion('public/king-of-aeo-scoreboard/index.md', 'scoreboard', sbMd);
+fillRegion('public/citation-watch/index.html', 'scoreboard', sbHtml);
+fillRegion('public/citation-watch/index.md', 'scoreboard', sbMd);
 
-for (const [key, page] of [
-  ['google_ai_overview', 'king-of-aeo-google-ai-overview'],
-  ['chatgpt', 'king-of-aeo-chatgpt'],
-  ['perplexity', 'king-of-aeo-perplexity'],
-  ['gemini', 'king-of-aeo-gemini'],
-]) {
+for (const key of ['google_ai_overview', 'chatgpt', 'perplexity', 'gemini']) {
   const er = rows.filter(r => r.engineKey === key);
   let eh, em;
   if (er.length) {
@@ -271,11 +262,11 @@ ${er.map(r => `<tr><td class="nw"><time datetime="${r.date}">${r.date}</time></t
 </tbody></table></div>`;
     em = `| Date | Market | Query | Names returned (in order) | Allan Oliveira |\n| --- | --- | --- | --- | --- |\n${er.map(r => `| ${r.date} | ${r.market} | ${mdCell(r.query)} | ${mdCell(r.names.join(', '))} | ${r.status} |`).join('\n')}`;
   } else {
-    eh = `<p><strong>Not yet measured.</strong> ${ENGINES[key]} enters the weekly tracking scope on 2026-10-05; the first observations publish with the first weekly log and appear here, on the scoreboard and in the raw CSV the same day.</p>`;
-    em = `**Not yet measured.** ${ENGINES[key]} enters the weekly tracking scope on 2026-10-05; the first observations publish with the first weekly log and appear here, on the scoreboard and in the raw CSV the same day.`;
+    eh = `<p><strong>Not yet measured.</strong> ${ENGINES[key]} enters the weekly tracking scope on 2026-10-05; the first observations publish with the first weekly log and appear here and in the raw CSV the same day.</p>`;
+    em = `**Not yet measured.** ${ENGINES[key]} enters the weekly tracking scope on 2026-10-05; the first observations publish with the first weekly log and appear here and in the raw CSV the same day.`;
   }
-  fillRegion(`public/${page}/index.html`, `obs-${key}`, eh);
-  fillRegion(`public/${page}/index.md`, `obs-${key}`, em);
+  fillRegion('public/citation-watch/index.html', `obs-${key}`, eh);
+  fillRegion('public/citation-watch/index.md', `obs-${key}`, em);
 }
 console.log(`scoreboard + engine tables rendered (${rows.length} merged observation rows)`);
 

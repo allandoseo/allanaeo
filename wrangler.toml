@@ -12,8 +12,10 @@ account_id = "6939ad4db2ec5dc60b8d7c57b7e6faab"
 name = "allanaeo"
 compatibility_date = "2026-09-29"
 
-# Descomente se o Worker precisar de codigo, apontando para o entry point:
-# main = "src/index.js"
+# Codigo do Worker: so roda quando nenhum arquivo de public/ casa com a URL
+# (assets sao servidos primeiro). Hoje ele faz os 301 da consolidacao de
+# 2026-10-07 e devolve 404 para o resto.
+main = "src/index.js"
 
 # Dominio proprio. Exige que a zona allanaeo.com esteja nesta mesma conta
 # (allanaeocom); no deploy o Cloudflare cria o registro DNS e o certificado.

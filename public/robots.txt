@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://allanaeo.com/sitemap.xml
+Sitemap: https://allanaeo.com/sitemap-images.xml
+Sitemap: https://allanaeo.com/sitemap-videos.xml
