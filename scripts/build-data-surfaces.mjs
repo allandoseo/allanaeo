@@ -184,6 +184,8 @@ const PAGES = [
   'public/research/6-dollar-press-release/index.html',
   'public/research/king-of-aeo-contest-timeline/index.html',
   'public/research/september-2026-spam-update-log/index.html',
+  // the /wiki/ section (rendered by build-wiki.mjs from data/wiki.json): hub, then entries
+  ...(fs.existsSync('public/wiki/index.html') ? ['public/wiki/index.html', ...fs.readdirSync('public/wiki', { withFileTypes: true }).filter(d => d.isDirectory()).map(d => `public/wiki/${d.name}/index.html`).sort()] : []),
 ];
 const readGraph = f => JSON.parse(read(f).match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 const editGraph = (f, fn) => {
