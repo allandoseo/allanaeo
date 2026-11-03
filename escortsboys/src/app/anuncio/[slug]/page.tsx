@@ -161,7 +161,7 @@ export default async function AdPage({ params }: Props) {
           ) : null}
 
           <div className="flex flex-wrap items-center justify-between gap-2 text-[13px] text-muted">
-            <span>Publicado em {formatDate(ad.publishedAt ?? ad.updatedAt)} · código {ad.id.slice(0, 8).toUpperCase()}</span>
+            <span>Publicado em {formatDate(ad.publishedAt ?? ad.updatedAt)} · código {ad.id.replace(/-/g, '').slice(-8).toUpperCase()}</span>
             <ReportDialog adId={ad.id} />
           </div>
         </div>

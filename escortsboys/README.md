@@ -24,7 +24,7 @@ npm install
 npm run dev                  # http://localhost:3000
 ```
 
-No primeiro acesso o armazenamento local é criado em `.data/db.json` com cidades, modalidades, planos (sem preço) e 16 **anúncios de exemplo** — todos marcados como "Exemplo", sem verificação, sem disponibilidade declarada e com contatos desativados. As credenciais geradas para o admin e para um anunciante de exemplo ficam em `.data/credenciais-locais.txt` (nunca versionado). Para recomeçar do zero, apague a pasta `.data/`.
+No primeiro acesso o armazenamento local é criado em `.data/db.json` com cidades, modalidades, planos (sem preço) e 16 **anúncios de exemplo** — todos marcados como "Exemplo", sem verificação, sem disponibilidade declarada e com contatos desativados. As credenciais geradas para o admin e para um anunciante de exemplo ficam em `.data/credenciais-locais.txt` (nunca versionado). Para recomeçar do zero, apague a pasta `.data/`. Com `ADMIN_PASSWORD` definido, a conta admin é criada no carregamento do banco se ainda não existir (uma conta já existente com o mesmo e-mail nunca é promovida automaticamente). Em `NODE_ENV=production` o seed não cria usuários de teste.
 
 | Comando | O que faz |
 | --- | --- |
@@ -32,7 +32,7 @@ No primeiro acesso o armazenamento local é criado em `.data/db.json` com cidade
 | `npm run build && npm start` | build e servidor de produção |
 | `npm test` | testes unitários (busca, filtros, validações, disponibilidade, senhas) |
 | `npm run typecheck` / `npm run lint` | TypeScript e ESLint |
-| `npm run test:e2e` | smoke E2E com Playwright contra `BASE_URL` (padrão `http://localhost:3000`) |
+| `npm run test:e2e` | smoke E2E com Playwright contra `BASE_URL` (padrão `http://localhost:3000`): rastreia links internos, checa console/HTTP/overflow, barreira 18+, proteção de rotas e o fluxo completo cadastro → perfil → anúncio com foto → moderação → anúncio público. Contra `npm start`, rode servidor e teste com o mesmo `ADMIN_PASSWORD` |
 
 ## Rotas
 

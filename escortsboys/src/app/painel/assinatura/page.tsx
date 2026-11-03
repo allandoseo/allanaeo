@@ -16,7 +16,7 @@ export default async function AssinaturaPage() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {plans.map((p) => (
             <Card key={p.id} className={cx('flex flex-col gap-3 p-5', p.highlight && 'border-brand')}>
-              <div className="flex items-center gap-2"><h2 className="text-lg font-bold text-navy">{p.name}</h2>{p.highlight ? <Badge tone="brand">Mais escolhido</Badge> : null}</div>
+              <div className="flex items-center gap-2"><h2 className="text-lg font-bold text-navy">{p.name}</h2>{p.highlight ? <Badge tone="brand">Recomendado</Badge> : null}</div>
               <p className="text-sm text-muted">{p.description}</p>
               <p className="text-xl font-bold">{p.priceCents !== null ? `${formatBRL(p.priceCents / 100)}` : 'Valor a definir'} <span className="text-sm font-normal text-muted">/ {p.periodDays} dias</span></p>
               <ul className="list-disc space-y-1 pl-5 text-sm">{p.features.map((f) => <li key={f}>{f}</li>)}</ul>

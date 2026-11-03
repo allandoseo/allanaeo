@@ -19,7 +19,8 @@ function creds() {
     const get = (label) => txt.match(new RegExp(`${label}: (\\S+) / (\\S+)`))?.slice(1);
     return { admin: get('Admin'), advertiser: get('Anunciante de exemplo') };
   } catch {
-    return {};
+    // Em produção o seed não cria usuários de teste: use ADMIN_EMAIL/ADMIN_PASSWORD do ambiente.
+    return process.env.ADMIN_PASSWORD ? { admin: [process.env.ADMIN_EMAIL || 'admin@escortsboys.local', process.env.ADMIN_PASSWORD] } : {};
   }
 }
 
@@ -66,10 +67,132 @@ async function crawlFrom(page, starts, limit) {
 }
 
 async function login(page, email, password) {
+  await page.context().addCookies([{ name: 'eb_age', value: '1', url: BASE }]);
   await page.goto(`${BASE}/login`);
   await page.fill('#email', email);
   await page.fill('#password', password);
-  await Promise.all([page.waitForURL((u) => !u.pathname.startsWith('/login'), { timeout: 15000 }), page.click('button[type=submit]')]);
+  await Promise.all([page.waitForURL((u) => !u.pathname.startsWith('/login'), { timeout: 15000 }), page.click('main button[type=submit]')]);
+}
+
+
+/** Fluxo completo: cadastro de anunciante → perfil → anúncio em 10 etapas com foto → moderação → anúncio público. */
+async function advertiserFlow(browser, admin) {
+  const stamp = Date.now().toString(36);
+  const name = `Teste${stamp.slice(-5)}`;
+  const email = `e2e-${stamp}@exemplo.com`;
+  const password = 'senhaE2E123';
+  const ctx = await browser.newContext({ viewport: { width: 1366, height: 900 } });
+  await ctx.addCookies([{ name: 'eb_age', value: '1', url: BASE }]);
+  const p = await ctx.newPage();
+  const errors = [];
+  p.on('pageerror', (e) => errors.push(String(e)));
+  p.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  const step = async (label, fn) => {
+    try { await fn(); } catch (e) { problems.push(`fluxo anunciante — ${label}: ${String(e.message || e).split('\n')[0]}`); throw e; }
+  };
+
+  // Foto de teste JPEG gerada pelo próprio navegador (800×1000, sem pessoas)
+  const imgPage = await browser.newPage({ viewport: { width: 800, height: 1000 } });
+  await imgPage.setContent('<body style="margin:0;background:#426F96"><div style="height:500px;background:#17324D"></div></body>');
+  const jpeg = await imgPage.screenshot({ type: 'jpeg', quality: 80 });
+  await imgPage.close();
+
+  try {
+    await step('cadastro (validação)', async () => {
+      await p.goto(`${BASE}/cadastro?tipo=anunciante`);
+      await p.click('main button[type=submit]');
+      await p.waitForSelector('text=É necessário confirmar que você tem 18 anos', { timeout: 10000 });
+    });
+    await step('cadastro', async () => {
+      await p.fill('#name', 'Pessoa de Teste');
+      await p.fill('#email', email);
+      await p.fill('#password', password);
+      await p.fill('#confirm', password);
+      await p.check('#adult');
+      await p.check('#terms');
+      await Promise.all([p.waitForURL(/\/painel\/perfil/, { timeout: 15000 }), p.click('main button[type=submit]')]);
+    });
+    await step('perfil', async () => {
+      await p.fill('#publicName', name);
+      await p.fill('#bio', 'Perfil criado pelo teste automatizado.');
+      await p.selectOption('#citySlug', 'rio-de-janeiro');
+      await p.click('button:has-text("Salvar perfil")');
+      await p.waitForSelector('text=/salvo|atualizado/i', { timeout: 10000 });
+    });
+    const cont = async () => { await p.click('button:has-text("Continuar")'); await p.waitForTimeout(400); };
+    await step('assistente etapa 1 (idade < 18 bloqueada)', async () => {
+      await p.goto(`${BASE}/painel/anuncios/novo`);
+      await p.fill('#w-name', name);
+      await p.fill('#w-age', '17');
+      await p.fill('#w-title', 'Atendimento discreto com hora marcada');
+      await cont();
+      await p.waitForSelector('text=A idade mínima para anunciar é 18 anos', { timeout: 8000 });
+      await p.fill('#w-age', '27');
+      await cont();
+    });
+    await step('assistente etapas 2–7', async () => {
+      await p.selectOption('#w-city', 'rio-de-janeiro');
+      await p.selectOption('#w-region', 'copacabana');
+      await cont();
+      await p.fill('#w-summary', 'Atendimento com agendamento e confirmação no dia.');
+      await p.fill('#w-desc', 'Descrição criada pelo teste automatizado para validar o fluxo completo de publicação de anúncios na plataforma, do cadastro à moderação.');
+      await cont();
+      await cont(); // características (opcional)
+      await p.check('text=Hotel ou motel');
+      await cont();
+      await cont(); // disponibilidade
+      await cont(); // valores
+    });
+    await step('assistente etapa 8 (upload de foto)', async () => {
+      await p.setInputFiles('#w-files', { name: 'foto.jpg', mimeType: 'image/jpeg', buffer: jpeg });
+      await p.waitForSelector('#w-alt-0', { timeout: 15000 });
+      await p.check('#w-consent');
+      await cont();
+    });
+    await step('assistente etapa 9 (contato)', async () => {
+      await p.fill('#w-whatsapp', '(21) 99999-0000');
+      await p.check('#w-showWhatsapp');
+      await cont();
+    });
+    await step('assistente etapa 10 (envio)', async () => {
+      if (SHOTS) await p.screenshot({ path: path.join(SHOTS, 'painel-revisao.png'), fullPage: true });
+      await Promise.all([p.waitForURL(/\/painel\/anuncios\?enviado=1/, { timeout: 15000 }), p.click('button:has-text("Enviar para moderação")')]);
+    });
+    for (const u of ['/painel', '/painel/perfil', '/painel/anuncios', '/painel/fotos', '/painel/disponibilidade', '/painel/mensagens', '/painel/estatisticas', '/painel/assinatura', '/painel/configuracoes']) {
+      await visit(p, u, { shot: `painel-${u.split('/').filter(Boolean).slice(1).join('-') || 'visao-geral'}` });
+    }
+    const denied = await p.goto(`${BASE}/admin`);
+    if (denied.status() !== 404) problems.push(`/admin com anunciante retornou ${denied.status()} (esperado 404)`);
+    if (!admin) return;
+    await step('moderação (aprovar)', async () => {
+      const c = await browser.newContext({ viewport: { width: 1366, height: 900 } });
+      const cp = await c.newPage();
+      await login(cp, ...admin);
+      await cp.goto(`${BASE}/admin/moderacao`);
+      const row = cp.locator(`text=${name}`).first();
+      await row.waitFor({ timeout: 10000 });
+      await cp.locator('button:has-text("Aprovar e publicar")').first().click();
+      await cp.waitForTimeout(1500);
+      await c.close();
+    });
+    await step('anúncio publicado aparece na busca', async () => {
+      await p.goto(`${BASE}/anuncios?q=${name}`);
+      await p.waitForSelector(`article:has-text("${name}")`, { timeout: 10000 });
+      await p.click(`article:has-text("${name}") >> text=Ver anúncio completo`);
+      await p.waitForSelector('a[href*="canal=whatsapp"]', { timeout: 10000 });
+      const href = await p.getAttribute('a[href*="canal=whatsapp"]', 'href');
+      const r = await p.request.get(BASE + href, { maxRedirects: 0 });
+      if (r.status() !== 302 || !String(r.headers().location).startsWith('https://wa.me/5521999990000')) throw new Error(`redirecionamento WhatsApp inesperado: ${r.status()} ${r.headers().location}`);
+      const html = await (await p.request.get(p.url())).text();
+      if (html.includes('99999')) throw new Error('telefone exposto no HTML público');
+      if (SHOTS) await p.screenshot({ path: path.join(SHOTS, 'anuncio-real-publicado.png'), fullPage: true });
+    });
+    console.log(`OK  fluxo completo do anunciante (${email})`);
+  } catch { /* já registrado */ } finally {
+    const real = errors.filter((e) => !/status of 4\d\d/.test(e));
+    if (real.length) problems.push(`fluxo anunciante → console: ${real.join(' | ').slice(0, 300)}`);
+    await ctx.close();
+  }
 }
 
 const browser = await chromium.launch();
@@ -130,7 +253,7 @@ try {
     }
     const adminDenied = await ap.goto(`${BASE}/admin`);
     if (adminDenied.status() !== 404) problems.push(`/admin com anunciante retornou ${adminDenied.status()} (esperado 404)`);
-  } else problems.push('credenciais do anunciante de exemplo não encontradas (.data/credenciais-locais.txt)');
+  } else console.log('(sem anunciante de exemplo: em produção ele não é criado; o fluxo abaixo cria um anunciante novo)');
 
   // Admin
   if (admin) {
@@ -141,6 +264,7 @@ try {
       await visit(cp, u, { shot: `admin-${u.split('/').filter(Boolean).slice(1).join('-') || 'visao-geral'}` });
     }
   } else problems.push('credenciais de admin não encontradas');
+  await advertiserFlow(browser, admin);
 } finally {
   await browser.close();
 }

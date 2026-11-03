@@ -86,7 +86,7 @@ export default async function AnunciarPage() {
             <ul className="mt-4 grid gap-3 md:grid-cols-3">
               {plans.map((p) => (
                 <li key={p.id} className={`flex flex-col rounded border bg-white p-5 ${p.highlight ? 'border-brand' : 'border-line'}`}>
-                  <div className="flex items-center gap-2"><h3 className="text-lg font-bold text-navy">{p.name}</h3>{p.highlight ? <Badge tone="brand">Mais escolhido</Badge> : null}</div>
+                  <div className="flex items-center gap-2"><h3 className="text-lg font-bold text-navy">{p.name}</h3>{p.highlight ? <Badge tone="brand">Recomendado</Badge> : null}</div>
                   <p className="mt-1 text-sm text-muted">{p.description}</p>
                   <p className="mt-3 text-2xl font-bold text-navy">{p.priceCents != null ? formatBRL(p.priceCents / 100) : 'Valor a definir'}</p>
                   <p className="text-xs text-muted">a cada {p.periodDays} dias</p>

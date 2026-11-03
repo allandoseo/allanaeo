@@ -1,19 +1,12 @@
 'use client';
 
+import { SUBJECTS } from './subjects';
 import { useActionState } from 'react';
 import { contactAction } from '@/app/actions/public';
 import type { FormState } from '@/app/actions/types';
 import { SubmitButton } from '@/components/auth/SubmitButton';
 import { Alert, Field, Input, Select, Textarea } from '@/components/ui';
 
-export const SUBJECTS: [string, string][] = [
-  ['duvida', 'Dúvida geral'],
-  ['anuncio', 'Anúncios e planos'],
-  ['remocao', 'Remoção de conteúdo'],
-  ['privacidade', 'Privacidade e dados pessoais (LGPD)'],
-  ['imprensa', 'Imprensa'],
-  ['outro', 'Outro assunto'],
-];
 
 export function ContactForm({ subject, plan }: { subject: string; plan?: string }) {
   const [state, action] = useActionState<FormState, FormData>(contactAction, {});

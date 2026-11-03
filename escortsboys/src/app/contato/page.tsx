@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs, Card } from '@/components/ui';
 import { getPlans } from '@/lib/repo';
-import { ContactForm, SUBJECTS } from './ContactForm';
+import { ContactForm } from './ContactForm';
+import { SUBJECTS } from './subjects';
 
 export const metadata: Metadata = {
   title: 'Contato',

@@ -135,6 +135,22 @@ function demoAd(i: number, owner: User, profile: Profile): Ad {
   };
 }
 
+/** Garante a conta admin definida por ADMIN_EMAIL/ADMIN_PASSWORD (também em bancos já existentes). */
+export async function ensureAdmin(db: Database): Promise<boolean> {
+  const pwd = process.env.ADMIN_PASSWORD;
+  if (!pwd) return false;
+  const email = (process.env.ADMIN_EMAIL || 'admin@escortsboys.local').toLowerCase();
+  const existing = db.users.find((u) => u.email === email);
+  if (existing) {
+    // Nunca promove automaticamente uma conta existente (alguém poderia ter se cadastrado com esse e-mail).
+    if (existing.role !== 'admin') console.warn(`[escortsboys] ADMIN_EMAIL ${email} pertence a uma conta não-admin; promova manualmente.`);
+    return false;
+  }
+  const t = now();
+  db.users.push({ id: randomUUID(), email, name: 'Administração', passwordHash: await hashPassword(pwd), role: 'admin', status: 'active', ageConfirmedAt: t, termsAcceptedAt: t, createdAt: t, lastLoginAt: null });
+  return true;
+}
+
 async function writeCredentialsNote(lines: string[]) {
   const dir = process.env.DATA_DIR || path.join(process.cwd(), '.data');
   await fs.mkdir(dir, { recursive: true });

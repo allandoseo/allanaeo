@@ -36,15 +36,15 @@ export function AdCard({ ad, priority = false, headingLevel = 'h2' }: { ad: Publ
   const href = `/anuncio/${ad.slug}`;
   const place = [ad.regionName, ad.cityName].filter(Boolean).join(' · ');
   return (
-    <article className="flex flex-col overflow-hidden rounded border border-line bg-white min-[440px]:flex-row">
-      <div className="relative aspect-[4/3] w-full shrink-0 bg-line min-[440px]:aspect-auto min-[440px]:min-h-[236px] min-[440px]:w-[42%] min-[440px]:max-w-[240px]">
+    <article className="flex overflow-hidden rounded border border-line bg-white">
+      <div className="relative min-h-[210px] w-[36%] min-w-[118px] max-w-[240px] shrink-0 bg-line sm:min-h-[236px] sm:w-[42%]">
         <Link href={href} tabIndex={-1} aria-hidden="true" className="absolute inset-0">
-          <AdPhoto photo={ad.photos[0]} priority={priority} sizes="(max-width: 440px) 100vw, 240px" />
+          <AdPhoto photo={ad.photos[0]} priority={priority} sizes="(max-width: 640px) 36vw, 240px" />
         </Link>
         <span className="pointer-events-none absolute bottom-2 left-2 rounded-sm bg-navy/85 px-1.5 py-0.5 text-[11px] font-semibold text-white">{ad.photos.length} {ad.photos.length === 1 ? 'foto' : 'fotos'}</span>
-        <FavoriteButton adId={ad.id} name={ad.publicName} className="absolute right-2 top-2" />
+        <FavoriteButton adId={ad.id} name={ad.publicName} className="absolute right-1.5 top-1.5 sm:right-2 sm:top-2" />
       </div>
-      <div className="flex min-w-0 flex-1 flex-col gap-1.5 p-4">
+      <div className="flex min-w-0 flex-1 flex-col gap-1.5 p-3 sm:p-4">
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
           <H className="text-lg font-bold leading-tight text-navy">
             <Link href={href} className="text-navy">{ad.publicName}</Link>
@@ -55,19 +55,19 @@ export function AdCard({ ad, priority = false, headingLevel = 'h2' }: { ad: Publ
         </div>
         <p className="flex items-center gap-1 text-[13px] text-muted"><IconPin size={14} /> {place}</p>
         <AvailabilityLine ad={ad} />
-        <p className="line-clamp-2 text-sm leading-snug text-ink">{ad.summary}</p>
+        <p className="line-clamp-2 hidden text-sm leading-snug text-ink min-[480px]:block">{ad.summary}</p>
         {ad.modes.length ? (
           <ul className="flex flex-wrap gap-1.5" aria-label="Modalidades de atendimento">
             {ad.modes.map((m) => <li key={m.slug} className="rounded-sm bg-sky px-2 py-0.5 text-xs text-brand">{m.name}</li>)}
           </ul>
         ) : null}
-        {ad.areasServed.length ? <p className="text-xs text-muted">Atende: {ad.areasServed.join(', ')}</p> : null}
+        {ad.areasServed.length ? <p className="hidden text-xs text-muted sm:block">Atende: {ad.areasServed.join(', ')}</p> : null}
         <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-line pt-2.5">
           <div className="flex flex-col">
             <PriceLabel ad={ad} className="text-[15px]" />
             <span className="text-[11px] text-muted">Atualizado {timeAgo(ad.updatedAt)}</span>
           </div>
-          <Link href={href} className="rounded bg-brand px-3.5 py-2.5 text-[13px] font-semibold text-white no-underline hover:bg-brand-dark hover:no-underline">
+          <Link href={href} className="w-full rounded bg-brand px-3.5 py-2.5 text-center text-[13px] font-semibold text-white no-underline hover:bg-brand-dark hover:no-underline min-[480px]:w-auto">
             Ver anúncio completo
           </Link>
         </div>
