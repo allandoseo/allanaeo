@@ -1,5 +1,7 @@
 # allanaeo
 
+> Este repositório também contém **`escortsboys/`**, uma aplicação Next.js independente (plataforma de anúncios). Ela não faz parte do deploy deste site: `public/` e `wrangler.toml` continuam servindo só o allanaeo.com. Veja `escortsboys/README.md`.
+
 ## Deploy Cloudflare: travando a conta de destino
 
 Este projeto convive com mais de uma conta Cloudflare no mesmo navegador. Um
